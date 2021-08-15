@@ -1,0 +1,28 @@
+{
+  "name": "College",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "apollo-server-express": "^3.1.2",
+    "express": "^4.17.1",
+    "graphql": "^15.5.1",
+    "mongoose": "^5.13.7",
+    "nodemon": "^2.0.12",
+    "reflect-metadata": "^0.1.13",
+    "ts-node": "^10.2.0",
+    "ts-node-dev": "^1.1.8",
+    "type-graphql": "^1.1.1",
+    "typescript": "^4.3.5"
+  },
+  "devDependencies": {
+    "@types/mongoose": "^5.11.97"
+  },
+  "scripts": {
+    "dev": "ts-node-dev --respawn src/server.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
