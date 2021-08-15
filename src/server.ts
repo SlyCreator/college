@@ -2,37 +2,24 @@ import {ApolloServer} from "apollo-server-express";
 import * as Express from "express";
 import "reflect-metadata"
 import {buildSchema} from "type-graphql";
-import * as Mongoose from "mongoose";
-// import {config} from "dotenv";
+import Connect from "./config/connect"
 import {UserResolver} from "./UserService/UserResolver";
 
-async function startServer() {
+const startServer = async ()=> {
+    const db = "mongodb://localhost:27017/college"
+    Connect({ db })
+    const app = Express()
     require('dotenv').config({ path: __dirname+'/.env' });
     const schema = await buildSchema({
         resolvers:[UserResolver],
         emitSchemaFile:true
     })
-    const app = Express();
-
-    const MONGO_USER = process.env.MONGODB_USER
-    const MONGO_PASS = process.env.MONGODB_PASS
-    Mongoose.connect(
-        `mongodb+srv://${MONGO_USER}:${MONGO_PASS}@cluster0-xv4mh.mongodb.net/test?retryWrites=true&w=majority`,{
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        }
-    ).then(() =>{
-        console.log("Mongo server connected successfully")
-
-        const server = new ApolloServer({schema,context:()=>({}),})
-        server.applyMiddleware({app})
-        const  PORT = process.env.PORT;
-        app.listen(PORT,()=>{
-            console.log(`server is running at port:${PORT}`)
-        })
-    })
-    .catch(err =>{
-        console.log(err)
-    })
+    const apolloServer = new ApolloServer({schema,context:()=>({}),})
+    await apolloServer.start();
+    apolloServer.applyMiddleware({app})
+    const  PORT = process.env.PORT || 5678;
+    await new Promise(()=> app.listen({ port: PORT }));
+    console.log(`🚀 Server ready at http://localhost:4000${apolloServer.graphqlPath}`);
+    return { apolloServer, app };
 }
 startServer();
