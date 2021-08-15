@@ -3,11 +3,13 @@ import * as Express from "express";
 import "reflect-metadata"
 import {buildSchema} from "type-graphql";
 import * as Mongoose from "mongoose";
+// import {config} from "dotenv";
+import {UserResolver} from "./UserService/UserResolver";
 
 async function startServer() {
-    require("dotenv").config(__dirname + ".env")
+    require('dotenv').config({ path: __dirname+'/.env' });
     const schema = await buildSchema({
-        resolvers:[],
+        resolvers:[UserResolver],
         emitSchemaFile:true
     })
     const app = Express();
@@ -20,7 +22,7 @@ async function startServer() {
             useUnifiedTopology: true,
         }
     ).then(() =>{
-        console.log("Mongo server connected sucessfully")
+        console.log("Mongo server connected successfully")
 
         const server = new ApolloServer({schema,context:()=>({}),})
         server.applyMiddleware({app})
