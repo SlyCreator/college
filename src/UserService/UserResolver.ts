@@ -4,8 +4,8 @@ import UserSchema from "./UserSchema"
 @Resolver(()=> UserSchema)
 export class UserResolver {
     @Query(() => String)
-    sample(): String {
-        return "Hello"
+    samples(): String {
+        return "Hello world"
     }
 
 }

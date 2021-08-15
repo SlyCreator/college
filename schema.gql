@@ -4,5 +4,5 @@
 # -----------------------------------------------
 
 type Query {
-  sample: String!
+  samples: String!
 }
