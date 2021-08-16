@@ -1,5 +1,5 @@
 import { Field, ObjectType, ID } from "type-graphql"
-import { IsEmail, Length } from "class-validator"
+import { IsEmail, Length,IsMobilePhone } from "class-validator"
 
 @ObjectType({ description: "User Schema" })
 export default class User {
@@ -24,6 +24,7 @@ export default class User {
     email: String
 
     @Field()
+    @IsMobilePhone()
     phone: Number
 
     password: String
