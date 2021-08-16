@@ -5,9 +5,11 @@ import {buildSchema} from "type-graphql";
 import Connect from "./config/connect"
 import {UserResolver} from "./UserService/UserResolver";
 import UserModel from "./UserService/UserModel";
-
 import {Container} from "typedi";
+
+Container.set({ id: "USER", factory: () => UserModel });
 const startServer = async ()=> {
+
     const db = "mongodb://localhost:27017/college"
     Connect({ db })
     const app = Express()
@@ -18,7 +20,7 @@ const startServer = async ()=> {
         nullableByDefault: true,
         container: Container,
     })
-    //Container.set();
+   // Container.set();
 
     const apolloServer = new ApolloServer({
         schema,
