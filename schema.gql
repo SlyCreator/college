@@ -3,6 +3,28 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+type Mutation {
+  SignUp(email: String, password: String, phone: Float): User
+}
+
 type Query {
-  samples: String!
+  loginUser(email: String, password: String): UserResponse
+  samples: String
+}
+
+"""User Schema"""
+type User {
+  email: String
+  firstName: String
+  id: ID
+  lastName: String
+  phone: Float
+  userName: String
+}
+
+"""User Response"""
+type UserResponse {
+  data: User
+  error: String
+  success: Boolean
 }
