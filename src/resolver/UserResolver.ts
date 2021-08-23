@@ -1,9 +1,9 @@
 import {Arg, Mutation, Query, Resolver} from "type-graphql"
-import UserSchema from "./UserSchema";
-import UserResponse from "./UserResponse";
-import { IUser } from "./UserModel";
+import UserSchema from "../schema/UserSchema";
+import UserResponse from "../util/UserResponse";
+import { IUser } from "../model/UserModel";
 import * as bcrypt from "bcryptjs";
-import { UserService } from "./UserService";
+import { UserService } from "../service/UserService";
 import {Service} from "typedi";
 
 @Service()

@@ -1,5 +1,5 @@
 import { Field, ObjectType } from "type-graphql";
-import UserSchema from "./UserSchema";
+import UserSchema from "../schema/UserSchema";
 @ObjectType({ description: "User Response" })
 
 export default class UserResponse {

@@ -1,5 +1,5 @@
 import { Service, Inject } from "typedi";
-import { IUser,IUserModel } from "./UserModel";
+import { IUser,IUserModel } from "../model/UserModel";
 
 @Service()
 export class UserService {
